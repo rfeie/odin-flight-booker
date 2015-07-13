@@ -1,0 +1,23 @@
+<h1>Flight Information</h1>
+<p>Departing airport: <%= @flight.from_airport.name %></p>
+<p>Duration: <%= Time.at(@flight.duration).utc.strftime("%H:%M:%S") %></p>
+<p>Date: <%= @flight.departure_time_formatted %></p>
+<p>Arriving airport: <%= @flight.to_airport.name %></p>
+
+<%= form_for(@booking) do |f|%>
+	<%= f.hidden_field :flight_id, :value => @booking.flight_id %>	
+	<%= f.hidden_field :num_of_passengers,:value => @booking.num_of_passengers %>	
+	<%= f.label :name, "Name of Person Booking:" %>
+	<%= f.text_field :name %>
+	<p>Number of passengers: <%= @booking.num_of_passengers %></p>
+	<h2>Please enter Passenger Information</h2>
+		<%= f.fields_for :passengers, @passengers do |passengers_form|%>
+			<h3>Passenger:</h3>
+			<%= passengers_form.label :name  %><br>
+			<%= passengers_form.text_field :name %><br>
+			<%= passengers_form.label :email  %><br>
+			<%= passengers_form.text_field :email %><br>
+		<%end%>
+
+	<%= f.submit "Book Flight"%>
+<% end %>

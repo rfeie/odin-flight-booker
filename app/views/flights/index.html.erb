@@ -1,0 +1,32 @@
+<h1>Book Your Flights!</h1>
+
+
+<%= form_for(:search, url: flights_path, method: :get) do |f| %>
+	<%= f.label(:departing_id) %> : 
+	<%= f.select "departing_id", options_from_collection_for_select(@airports, :id, :name) %>
+	<br>
+	<%= f.label(:arriving_id) %> : 
+	<%= f.select "arriving_id", options_from_collection_for_select(@airports, :id, :name) %>
+	<br>
+	<%= f.label(:number_of_passengers) %> : 
+	<%= f.select "number_of_passengers", options_for_select(1..4) %>
+	<br>
+	<%= f.label "Departure Date" %> : 
+	<%= f.select "departure_time", options_from_collection_for_select(@flights, :departure_time, :departure_time_formatted) %>
+
+	<br>
+	<%= f.submit("Search for flights") %>
+<% end %>
+
+<% if @found_flights && !@found_flights.empty? %>
+	<h2>Flights Found!</h2>
+	<%= form_for(@booking, url: new_booking_path, method: :get) do |d|%>
+	<%= hidden_field_tag :passengers, @passengers%>
+		<% @found_flights.each do |flight|%>
+			<%= d.radio_button(:flight,  flight.id)%>	
+			<%= d.label "#{flight.from_airport.name} -> #{flight.to_airport.name} (#{flight.departure_time})"%>	
+			<br>
+		<%end%>
+		<%= d.submit "Select This Flight" %>
+	<%end%>
+<% end %>
