@@ -1,0 +1,15 @@
+Thank you for your booking!
+
+Your flight is confirmed:
+
+From: <%= @booking.flight.from_airport.name%>
+
+To: <%= @booking.flight.to_airport.name%>
+
+Duration: <%= Time.at(@booking.flight.duration).utc.strftime('%H:%M:%S')%>
+
+Departure Time: <%= @booking.flight.departure_time_formatted %>
+
+We hope you enjoy your flight
+
+Odin Booking

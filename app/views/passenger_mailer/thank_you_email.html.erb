@@ -1,0 +1,8 @@
+<h1>Thank you for your booking!</h1>
+<p>Your flight is confirmed:</p>
+<p>From: <%= @booking.flight.from_airport%></p>
+<p>To: <%= @booking.flight.to_airport%></p>
+<p>Duration: <%= Time.at(@booking.flight.duration).utc.strftime('%H:%M:%S')%></p>
+<p>Departure Time: <%= @booking.flight.departure_time_formatted %></p>
+<p>We hope you enjoy your flight</p>
+<h4>Odin Booking</h4>

@@ -7,5 +7,5 @@ class Flight < ActiveRecord::Base
 		def departure_time_formatted
 		    self.departure_time.strftime("%m/%d/%Y")
 	 	end
-
+	 	
 end
